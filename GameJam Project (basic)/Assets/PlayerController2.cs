@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
 
     public Rigidbody2D rb ;
@@ -31,14 +31,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         
-        if ( Input.GetKey("d") ) 
+        if ( Input.GetKey(KeyCode.RightArrow) ) 
         {
             if ( rb.velocity.x < maxspeed ) 
             {
                 rb.AddForce(new Vector2(initialspeed * Time.deltaTime , 0)) ;
             }
         }
-        if ( Input.GetKey("a")) 
+        if ( Input.GetKey(KeyCode.LeftArrow)) 
         {
             if ( rb.velocity.x > -maxspeed ) 
             {
@@ -49,20 +49,20 @@ public class PlayerController : MonoBehaviour
 
     void Update(){
 
-        if ( Input.GetKeyUp("d") || Input.GetKeyUp("a"))
+        if ( Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
                rb.velocity = new Vector2(0,rb.velocity.y);
         }
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkradius, groundef) || (Physics2D.OverlapCircle(rightPos.position, checkradius, groundef) || Physics2D.OverlapCircle(leftPos.position, checkradius, groundef));
 
-        if (isGrounded == true && Input.GetKeyDown("space")){
+        if (isGrounded == true && Input.GetKeyDown(KeyCode.UpArrow)){
                  rb.AddForce((new Vector2(0 , jumpforce)), ForceMode2D.Impulse) ;
                  isJumping = true;
                  jumptimeCounter = jumptime;
         }
 
-        if(Input.GetKey("space") && isJumping == true){
+        if(Input.GetKey(KeyCode.UpArrow) && isJumping == true){
             if(jumptimeCounter > 0){
                 // rb.AddForce((new Vector2(0 , jumpforce)), ForceMode2D.Impulse) ;
                rb.AddForce(new Vector2(0 , jumpforce * Time.deltaTime * 200)) ;
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if(Input.GetKeyUp("space")){
+        if(Input.GetKeyUp(KeyCode.UpArrow)){
             isJumping = false; 
         }
 
@@ -89,3 +89,4 @@ public class PlayerController : MonoBehaviour
 
     }
 }
+
