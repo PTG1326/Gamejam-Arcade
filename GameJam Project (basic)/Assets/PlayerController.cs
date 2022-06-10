@@ -56,13 +56,13 @@ public class PlayerController : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkradius, groundef) || (Physics2D.OverlapCircle(rightPos.position, checkradius, groundef) || Physics2D.OverlapCircle(leftPos.position, checkradius, groundef));
 
-        if (isGrounded == true && Input.GetKeyDown("space")){
+        if (isGrounded == true && Input.GetKeyDown("w")){
                  rb.AddForce((new Vector2(0 , jumpforce)), ForceMode2D.Impulse) ;
                  isJumping = true;
                  jumptimeCounter = jumptime;
         }
 
-        if(Input.GetKey("space") && isJumping == true){
+        if(Input.GetKey("w") && isJumping == true){
             if(jumptimeCounter > 0){
                 // rb.AddForce((new Vector2(0 , jumpforce)), ForceMode2D.Impulse) ;
                rb.AddForce(new Vector2(0 , jumpforce * Time.deltaTime * 200)) ;
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if(Input.GetKeyUp("space")){
+        if(Input.GetKeyUp("w")){
             isJumping = false; 
         }
 
