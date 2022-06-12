@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class trialWallMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -10,16 +10,9 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    public float jumpForce = 120f ;
-    public float sideForce = 100f ;
-    
-
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         
-        
-
-
     }
 }

@@ -11,10 +11,11 @@ public class Camera_Movement : MonoBehaviour
     public Rigidbody2D p2;
     public int difference;
     public int top_distance;
+    
 
     void Start()
     {
-        
+                
     }
 
     // Update is called once per frame

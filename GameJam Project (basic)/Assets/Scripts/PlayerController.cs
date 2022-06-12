@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    bool input;
+    public LayerMask wallLayer;
 
     public Rigidbody2D rb ;
     public int maxspeed = 7 ;
@@ -15,11 +17,17 @@ public class PlayerController : MonoBehaviour
     public Transform rightPos;
     public Transform leftPos;
     public float checkradius;
-    public LayerMask groundef;    
+    public LayerMask groundef;
+    public LayerMask wall;    
 
     private float jumptimeCounter;
     public float jumptime;
     private bool isJumping;
+
+    bool isTouchingFront;
+    public Transform frontCheck;
+    bool wallSliding;
+    public float wallSlidingSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +44,7 @@ public class PlayerController : MonoBehaviour
             if ( rb.velocity.x < maxspeed ) 
             {
                 rb.AddForce(new Vector2(initialspeed * Time.deltaTime , 0)) ;
+                input = true;
             }
         }
         if ( Input.GetKey("a")) 
@@ -43,6 +52,7 @@ public class PlayerController : MonoBehaviour
             if ( rb.velocity.x > -maxspeed ) 
             {
                 rb.AddForce(new Vector2(-initialspeed * Time.deltaTime , 0)) ;
+                input = true;
             }
         }
     }
@@ -52,6 +62,7 @@ public class PlayerController : MonoBehaviour
         if ( Input.GetKeyUp("d") || Input.GetKeyUp("a"))
         {
                rb.velocity = new Vector2(0,rb.velocity.y);
+               input = false;
         }
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkradius, groundef) || (Physics2D.OverlapCircle(rightPos.position, checkradius, groundef) || Physics2D.OverlapCircle(leftPos.position, checkradius, groundef));
@@ -75,6 +86,22 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetKeyUp("w")){
             isJumping = false; 
+        }
+
+        isTouchingFront =Physics2D.OverlapCircle(frontCheck.position, checkradius, groundef);
+
+        if(isTouchingFront == true && isGrounded == false && input==true)
+        {
+            wallSliding = true;
+        }
+        else
+        {
+            wallSliding = false;
+        }
+
+        if(wallSliding == true)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));            
         }
 
         
