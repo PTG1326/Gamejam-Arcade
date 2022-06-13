@@ -24,15 +24,31 @@ public class PlayerController : MonoBehaviour
     public float jumptime;
     private bool isJumping;
 
+    public float offtime;
+    public static float offtimecounter;
+    public static bool visible;
+
     bool isTouchingFront;
     public Transform frontCheck;
     bool wallSliding;
     public float wallSlidingSpeed;
 
-    // Start is called before the first frame update
-    void Start()
+    void OnBecameInvisible()
     {
-        
+        visible = false;
+    }
+
+    // ...and enable it again when it becomes visible.
+    void OnBecameVisible()
+    {
+        visible = true;
+    }
+
+    // Start is called before the first frame update
+    public void Start()
+    {
+        offtimecounter = offtime;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -88,6 +104,19 @@ public class PlayerController : MonoBehaviour
             isJumping = false; 
         }
 
+        
+        
+        if(visible == false){
+            if(offtimecounter>0){
+               offtimecounter -= Time.deltaTime;
+            }
+            else{
+            FindObjectOfType<GameManager>().gameOver();
+            }
+        }
+        if(visible == true){
+            offtimecounter = offtime;
+        }
         // isTouchingFront =Physics2D.OverlapCircle(frontCheck.position, checkradius, groundef);
 
         // if(isTouchingFront == true && isGrounded == false && input==true)
@@ -115,4 +144,6 @@ public class PlayerController : MonoBehaviour
         // }
 
     }
+
+    
 }

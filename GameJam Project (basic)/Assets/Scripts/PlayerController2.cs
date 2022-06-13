@@ -17,14 +17,31 @@ public class PlayerController2 : MonoBehaviour
     public float checkradius;
     public LayerMask groundef;    
 
-    private float jumptimeCounter;
+    public float jumptimeCounter;
     public float jumptime;
     private bool isJumping;
 
-    // Start is called before the first frame update
-    void Start()
+    public float offtime;
+    public static float offtimecounter;
+    public static bool visible;
+
+    void OnBecameInvisible()
     {
-        
+        visible = false;
+    }
+
+    // ...and enable it again when it becomes visible.
+    void OnBecameVisible()
+    {
+        visible = true;
+    }
+
+
+    // Start is called before the first frame update
+    public void Start()
+    {
+        offtimecounter = offtime;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -77,6 +94,20 @@ public class PlayerController2 : MonoBehaviour
             isJumping = false; 
         }
 
+        if(visible == false){
+            if(offtimecounter>0){
+               offtimecounter -= Time.deltaTime;
+            }
+            else{
+            FindObjectOfType<GameManager>().gameOver();
+            }
+        }
+        if(visible == true){
+            offtimecounter = offtime;
+        }
+        
+        
+
         
         // if ( transform.position.x < -8.49 ) {
         //     rb.AddForce((new Vector2(-rb.velocity.x , 0)), ForceMode2D.Impulse) ;
@@ -88,5 +119,9 @@ public class PlayerController2 : MonoBehaviour
         // }
 
     }
+
+   
+
+    
 }
 
