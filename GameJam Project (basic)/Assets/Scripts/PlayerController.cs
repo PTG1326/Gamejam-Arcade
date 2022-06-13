@@ -88,21 +88,21 @@ public class PlayerController : MonoBehaviour
             isJumping = false; 
         }
 
-        isTouchingFront =Physics2D.OverlapCircle(frontCheck.position, checkradius, groundef);
+        // isTouchingFront =Physics2D.OverlapCircle(frontCheck.position, checkradius, groundef);
 
-        if(isTouchingFront == true && isGrounded == false && input==true)
-        {
-            wallSliding = true;
-        }
-        else
-        {
-            wallSliding = false;
-        }
+        // if(isTouchingFront == true && isGrounded == false && input==true)
+        // {
+        //     wallSliding = true;
+        // }
+        // else
+        // {
+        //     wallSliding = false;
+        // }
 
-        if(wallSliding == true)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));            
-        }
+        // if(wallSliding == true)
+        // {
+        //     rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));            
+        // }
 
         
         // if ( transform.position.x < -8.49 ) {
