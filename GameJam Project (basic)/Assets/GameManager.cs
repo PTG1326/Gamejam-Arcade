@@ -7,14 +7,12 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject gameOverCanvas;
-    public GameObject gameStartCanvas;
 
     public void start(){
         FindObjectOfType<PlayerController>().Start();
         FindObjectOfType<PlayerController2>().Start();  
         Time.timeScale = 1;
-        SceneManager.LoadScene("SampleScene");
-        gameStartCanvas.SetActive(false);  
+        SceneManager.LoadScene("Scene1"); 
         
         }
     
