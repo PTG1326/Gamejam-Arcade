@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    bool input;
-    public LayerMask wallLayer;
+    
 
     public Rigidbody2D rb ;
     public int maxspeed = 7 ;
@@ -13,25 +12,23 @@ public class PlayerController : MonoBehaviour
 
     public int jumpforce = 10 ;
     private bool isGrounded ;
+    private bool isNearWallleft;
+    private bool isNearWallright;
     public Transform feetPos;
     public Transform rightPos;
     public Transform leftPos;
     public float checkradius;
     public LayerMask groundef;
-    public LayerMask wall;    
+    public LayerMask wall;
+    public int walljumpcount;   
+    private int walljumpcounter; 
 
     private float jumptimeCounter;
     public float jumptime;
     private bool isJumping;
-
     public float offtime;
     public static float offtimecounter;
     public static bool visible;
-
-    bool isTouchingFront;
-    public Transform frontCheck;
-    bool wallSliding;
-    public float wallSlidingSpeed;
 
     void OnBecameInvisible()
     {
@@ -65,7 +62,7 @@ public class PlayerController : MonoBehaviour
             if ( rb.velocity.x < maxspeed ) 
             {
                 rb.AddForce(new Vector2(initialspeed * Time.deltaTime , 0)) ;
-                input = true;
+                
             }
         }
         if ( Input.GetKey("a")) 
@@ -73,24 +70,25 @@ public class PlayerController : MonoBehaviour
             if ( rb.velocity.x > -maxspeed ) 
             {
                 rb.AddForce(new Vector2(-initialspeed * Time.deltaTime , 0)) ;
-                input = true;
+               
             }
         }
 
         if ( Input.GetKeyUp("d") || Input.GetKeyUp("a"))
         {
                rb.velocity = new Vector2(0,rb.velocity.y);
-               input = false;
+               
         }
 
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkradius, groundef) || (Physics2D.OverlapCircle(rightPos.position, checkradius, groundef) || Physics2D.OverlapCircle(leftPos.position, checkradius, groundef));
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkradius, groundef);
+        isNearWallleft =  Physics2D.OverlapCircle(leftPos.position, checkradius, wall);
+        isNearWallright = Physics2D.OverlapCircle(rightPos.position, checkradius, wall);
 
         if (isGrounded == true && Input.GetKeyDown("w")){
                  rb.AddForce((new Vector2(0 , jumpforce)), ForceMode2D.Impulse) ;
                  isJumping = true;
                  jumptimeCounter = jumptime;
         }
-
         if(Input.GetKey("w") && isJumping == true){
             if(jumptimeCounter > 0){
                 // rb.AddForce((new Vector2(0 , jumpforce)), ForceMode2D.Impulse) ;
@@ -102,6 +100,22 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+        if(isGrounded){
+            walljumpcounter = walljumpcount;
+        }
+        if((Input.GetKeyDown("w") && (isGrounded == false && isNearWallleft == true)) && walljumpcounter!=0){
+            //rb.AddForce(new Vector2(jumpforce/8, jumpforce/30f), ForceMode2D.Impulse);
+            rb.velocity = new Vector2(10, 15);
+            walljumpcounter -= 1;
+        }
+        if((Input.GetKeyDown("w") && (isGrounded == false && isNearWallright == true)) && walljumpcounter!=0){
+            //rb.AddForce(new Vector2(-jumpforce/8, jumpforce/30f), ForceMode2D.Impulse);
+            rb.velocity = new Vector2(-10, 15);
+            walljumpcounter -= 1;
+        }
+
+
         if(Input.GetKeyUp("w")){
             isJumping = false; 
         }

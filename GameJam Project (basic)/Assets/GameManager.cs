@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject gameOverCanvas;
+    //public string winner_string = "";
 
     public void start(){
         FindObjectOfType<PlayerController>().Start();
@@ -17,7 +18,6 @@ public class GameManager : MonoBehaviour
         }
     
     public void gameOver(){
-
         gameOverCanvas.SetActive(true);
         Time.timeScale = 0;
     }
