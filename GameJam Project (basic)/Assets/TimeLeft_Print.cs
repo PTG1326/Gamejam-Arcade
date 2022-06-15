@@ -17,7 +17,7 @@ public class TimeLeft_Print : MonoBehaviour
             GetComponent<UnityEngine.UI.Text>().text = Math.Round(PlayerController2.offtimecounter, 1).ToString();
         }
         else{
-           GetComponent<UnityEngine.UI.Text>().text= "Hehe eat dick bitch";
+           GetComponent<UnityEngine.UI.Text>().text= "Race to the top !";
         }
     }
 }

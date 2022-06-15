@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void Restart(){
-        start(); 
+        SceneManager.LoadScene("SampleScene"); 
+        //start(); 
 
     }
 }
