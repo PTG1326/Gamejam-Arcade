@@ -20,12 +20,10 @@ public class GameManager : MonoBehaviour
 
         gameOverCanvas.SetActive(true);
         Time.timeScale = 0;
-        Debug.Log("GameOver"); 
     }
 
     public void Restart(){
-        start();
-        Debug.Log("Restart'"); 
+        start(); 
 
     }
 }

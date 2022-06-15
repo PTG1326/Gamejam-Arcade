@@ -119,6 +119,11 @@ public class PlayerController : MonoBehaviour
         if(visible == true){
             offtimecounter = offtime;
         }
+
+
+        if(transform.position.y > 97) {
+            FindObjectOfType<GameManager>().gameOver() ;
+        }
         // isTouchingFront =Physics2D.OverlapCircle(frontCheck.position, checkradius, groundef);
 
         // if(isTouchingFront == true && isGrounded == false && input==true)

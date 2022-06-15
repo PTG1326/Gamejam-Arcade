@@ -109,6 +109,9 @@ public class PlayerController2 : MonoBehaviour
         }
         
         
+        if(transform.position.y > 97) {
+            FindObjectOfType<GameManager>().gameOver() ;
+        }
 
         
         // if ( transform.position.x < -8.49 ) {
