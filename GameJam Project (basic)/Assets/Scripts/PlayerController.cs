@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
             if(offtimecounter>0){
                offtimecounter -= Time.deltaTime;
             }
+        
             else{
             FindObjectOfType<GameManager>().gameOver();
             }
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour
 
 
         if(transform.position.y > 97) {
-            FindObjectOfType<GameManager>().gameOver() ;
+            FindObjectOfType<GameManager>().gameOver();
         }
         // isTouchingFront =Physics2D.OverlapCircle(frontCheck.position, checkradius, groundef);
 

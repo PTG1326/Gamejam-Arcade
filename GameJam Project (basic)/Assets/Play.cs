@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
  
      public void play(){
         SceneManager.LoadScene("Scene1");
+        Time.timeScale = 1;
      }
  
  }
