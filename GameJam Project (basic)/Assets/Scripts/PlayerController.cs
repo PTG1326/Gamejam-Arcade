@@ -55,7 +55,12 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         
-        if ( Input.GetKey("d") ) 
+       
+    }
+
+    void Update(){
+
+         if ( Input.GetKey("d") ) 
         {
             if ( rb.velocity.x < maxspeed ) 
             {
@@ -71,9 +76,6 @@ public class PlayerController : MonoBehaviour
                 input = true;
             }
         }
-    }
-
-    void Update(){
 
         if ( Input.GetKeyUp("d") || Input.GetKeyUp("a"))
         {

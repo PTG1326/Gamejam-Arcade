@@ -48,6 +48,11 @@ public class PlayerController2 : MonoBehaviour
     void FixedUpdate()
     {
         
+        
+    }
+
+    void Update(){
+
         if ( Input.GetKey(KeyCode.RightArrow) ) 
         {
             if ( rb.velocity.x < maxspeed ) 
@@ -62,9 +67,6 @@ public class PlayerController2 : MonoBehaviour
                 rb.AddForce(new Vector2(-initialspeed * Time.deltaTime , 0)) ;
             }
         }
-    }
-
-    void Update(){
 
         if ( Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
